@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.env
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+farmplus.db
+*.db-shm
+*.db-wal
+.DS_Store
+Thumbs.db
+*.egg-info/
+.pytest_cache/
+htmlcov/
+.coverage

@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Custom properties ──────────────────────────────────────────────────────── */
+:root {
+  --color-emerald-deep: #064E3B;
+  --color-mint:         #10B981;
+  --color-alabaster:    #F4F7F4;
+  --color-amber:        #F59E0B;
+  --color-coral:        #EF4444;
+}
+
+/* ── Base resets ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-alabaster);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: none;
+}
+
+/* ── Scrollbar (webkit) ──────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #10B98150;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: #10B981; }
+
+/* ── Frosted glass utility ───────────────────────────────────────────────────── */
+@layer components {
+  .glass {
+    @apply bg-white/60 backdrop-blur-md border border-white/40 shadow-glass;
+  }
+  .glass-dark {
+    @apply bg-emerald-deep/80 backdrop-blur-md border border-white/10 shadow-glass;
+  }
+  .glass-card {
+    @apply glass rounded-2xl;
+  }
+}
+
+/* ── Number input spinner removal ────────────────────────────────────────────── */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
+
+/* ── Smooth tab transitions ──────────────────────────────────────────────────── */
+main > * { transition: opacity 0.25s ease; }
+
+/* ── Focus ring override ─────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-mint);
+  outline-offset: 2px;
+}

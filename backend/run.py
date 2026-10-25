@@ -1,5 +1,5 @@
 """
-FarmPulse FastAPI — Development launcher
+Farmplus FastAPI — Development launcher
 Run: python run.py
 """
 import uvicorn

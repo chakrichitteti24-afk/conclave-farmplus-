@@ -1,5 +1,5 @@
 /**
- * FarmPulse — React entry point
+ * Farmplus — React entry point
  * IC26-01-01 Explainable Crop Stress Advisory
  */
 import React from 'react'

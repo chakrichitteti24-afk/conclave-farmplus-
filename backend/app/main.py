@@ -1,5 +1,5 @@
 """
-FarmPulse FastAPI Application Entry Point
+Farmplus FastAPI Application Entry Point
 IC26-01-01 — Explainable Crop Stress Advisory
 """
 from fastapi import FastAPI
@@ -23,10 +23,10 @@ log = structlog.get_logger()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    log.info("FarmPulse API starting up", version=settings.APP_VERSION)
+    log.info("Farmplus API starting up", version=settings.APP_VERSION)
     await init_db()
     yield
-    log.info("FarmPulse API shutting down")
+    log.info("Farmplus API shutting down")
 
 
 app = FastAPI(

@@ -4,7 +4,7 @@ from typing import List
 
 
 class Settings(BaseSettings):
-    APP_NAME: str = "FarmPulse Advisory API"
+    APP_NAME: str = "Farmplus Advisory API"
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = False
     SECRET_KEY: str = "change-me"

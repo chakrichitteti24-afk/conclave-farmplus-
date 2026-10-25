@@ -1,8 +1,8 @@
 {
-  "name": "farmpulse-frontend",
+  "name": "farmplus-frontend",
   "private": true,
   "version": "1.0.0",
-  "description": "FarmPulse: Explainable Crop Stress Advisory — IC26-01-01",
+  "description": "Farmplus: Explainable Crop Stress Advisory — IC26-01-01",
   "type": "module",
   "scripts": {
     "dev": "vite",

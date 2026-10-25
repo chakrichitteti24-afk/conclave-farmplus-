@@ -1,5 +1,5 @@
 /**
- * API utility — Axios instance pointed at the FarmPulse backend
+ * API utility — Axios instance pointed at the Farmplus backend
  */
 import axios from 'axios'
 

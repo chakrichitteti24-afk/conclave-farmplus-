@@ -19,5 +19,5 @@ async def health_check():
         status="ok",
         version="1.0.0",
         timestamp=datetime.now(timezone.utc).isoformat(),
-        service="FarmPulse Advisory API — IC26-01-01",
+        service="Farmplus Advisory API — IC26-01-01",
     )

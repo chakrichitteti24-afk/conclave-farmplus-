@@ -1,12 +1,12 @@
-# FarmPulse — IC26-01-01: Explainable Crop Stress Advisory
+# Farmplus — IC26-01-01: Explainable Crop Stress Advisory
 
 > Bio-Glass Agri UI · FastAPI Backend · React + Vite + Tailwind · EN/TE/HI i18n
 
 ---
 
-## 🌟 Key Advantages of FarmPulse
+## 🌟 Key Advantages of Farmplus
 
-FarmPulse is an explainable, hyper-localized, multi-device agricultural advisory platform built for Indian farmers, agronomists, and researchers.
+Farmplus is an explainable, hyper-localized, multi-device agricultural advisory platform built for Indian farmers, agronomists, and researchers.
 
 1. **Transparent Explainable AI (XAI)**
    - Instead of giving opaque "black-box" outputs, every stress score provides transparent feature attributions (SHAP-style explanations).
@@ -38,9 +38,9 @@ FarmPulse is an explainable, hyper-localized, multi-device agricultural advisory
 
 ---
 
-## ⚖️ Comparative Analysis: FarmPulse vs. Existing Systems
+## ⚖️ Comparative Analysis: Farmplus vs. Existing Systems
 
-| Feature / Dimension | Existing / Traditional Systems (SMS Portals, Kisan Call Centers, Generic Agri Apps) | Black-Box Deep Learning Apps (Image-only Leaf Scanners) | 🌾 **FarmPulse (Our Solution)** |
+| Feature / Dimension | Existing / Traditional Systems (SMS Portals, Kisan Call Centers, Generic Agri Apps) | Black-Box Deep Learning Apps (Image-only Leaf Scanners) | 🌾 **Farmplus (Our Solution)** |
 |---|---|---|---|
 | **Explainability (XAI)** | ❌ **None**: Generic static guidelines without physiological rationale. | ❌ **Black Box**: Provides only class labels (e.g., "Leaf Blight 92%") without feature attribution or underlying reasoning. | ✅ **Full Explainability**: Transparent breakdown of environmental triggers, contributing factors, and confidence scoring calibrated against ICAR crop thresholds. |
 | **Actionable Guidance** | ⚠️ **Generic**: "Water your field regularly" or "Spray insecticide". | ⚠️ **Vague**: "Use fungicide" with no timeline, dosage, or prioritization. | ✅ **Step-by-Step Prioritization**: Timed actions with urgency levels (e.g., "Irrigate within 6h"), exact dosages, and estimated yield impact. |

@@ -1,5 +1,5 @@
 /**
- * FarmPulse — IC26-01-01
+ * Farmplus — IC26-01-01
  * Full UI translations: English (en), Telugu (te), Hindi (hi)
  * ─────────────────────────────────────────────────────────────────────────────
  */
@@ -8,7 +8,7 @@ const translations = {
   // ── ENGLISH ─────────────────────────────────────────────────────────────────
   en: {
     // App shell
-    app_name: "FarmPulse",
+    app_name: "Farmplus",
     app_tagline: "Explainable Crop Stress Advisory",
     loading: "Loading…",
     save: "Save",
@@ -212,7 +212,7 @@ const translations = {
   // ── TELUGU ───────────────────────────────────────────────────────────────────
   te: {
     // App shell
-    app_name: "ఫార్మ్‌పల్స్",
+    app_name: "ఫార్మ్‌ప్లస్",
     app_tagline: "వివరించదగిన పంట ఒత్తిడి సలహా",
     loading: "లోడ్ అవుతోంది…",
     save: "సేవ్ చేయి",
@@ -416,7 +416,7 @@ const translations = {
   // ── HINDI ────────────────────────────────────────────────────────────────────
   hi: {
     // App shell
-    app_name: "फार्मपल्स",
+    app_name: "फार्मप्लस",
     app_tagline: "स्पष्टीकरण योग्य फसल तनाव सलाह",
     loading: "लोड हो रहा है…",
     save: "सहेजें",

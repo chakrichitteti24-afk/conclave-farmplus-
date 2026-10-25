@@ -36,19 +36,20 @@ export default function App() {
   const TabComponent = TAB_COMPONENTS[activeTab] ?? FieldsTab
 
   return (
-    <div className="min-h-screen bg-alabaster font-sans">
+    <div className="min-h-screen bg-alabaster font-sans antialiased text-gray-800 selection:bg-mint selection:text-emerald-deep">
       <BackgroundOrbs />
 
-      {/* Top bar — h-[56px] */}
-      <TopLanguageBar />
+      {/* Fixed top bar with responsive brand, tablet/desktop nav, and language switcher */}
+      <TopLanguageBar unreadCount={unreadAlerts} />
 
-      {/* Scrollable content area — padded top + bottom for fixed bars */}
+      {/* Scrollable content area: responsive fluid container */}
       <main
         className={clsx(
-          'relative z-10',
-          'pt-[72px] pb-[100px]',    // clear fixed top + floating bottom nav
-          'px-4 max-w-lg mx-auto',
-          'min-h-screen',
+          'relative z-10 w-full max-w-7xl mx-auto min-h-screen',
+          'pt-[68px] sm:pt-[76px]',
+          'pb-[100px] md:pb-12',    // safe space for mobile floating nav; compact for desktop
+          'px-3.5 sm:px-6 lg:px-8',
+          'gpu-accelerated'
         )}
       >
         {activeTab === 'alerts' ? (
@@ -58,7 +59,7 @@ export default function App() {
         )}
       </main>
 
-      {/* Floating bottom nav */}
+      {/* Floating bottom nav for mobile devices */}
       <BottomNavBar unreadCount={unreadAlerts} />
     </div>
   )

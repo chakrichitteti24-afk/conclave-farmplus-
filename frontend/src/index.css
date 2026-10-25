@@ -16,9 +16,22 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-emerald-deep: #064E3B;
+  --color-mint:         #10B981;
+  --color-alabaster:    #F4F7F4;
+  --color-amber:        #F59E0B;
+  --color-coral:        #EF4444;
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -27,30 +40,43 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior-y: none;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+button, a, input, select, textarea {
+  touch-action: manipulation;
 }
 
 /* ── Scrollbar (webkit) ──────────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: #10B98150;
+  background: #10B98140;
   border-radius: 99px;
 }
-::-webkit-scrollbar-thumb:hover { background: #10B981; }
+::-webkit-scrollbar-thumb:hover { background: #10B98180; }
 
 /* ── Frosted glass utility ───────────────────────────────────────────────────── */
 @layer components {
   .glass {
-    @apply bg-white/60 backdrop-blur-md border border-white/40 shadow-glass;
+    @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-glass;
+    transform: translateZ(0);
   }
   .glass-dark {
-    @apply bg-emerald-deep/80 backdrop-blur-md border border-white/10 shadow-glass;
+    @apply bg-emerald-deep/90 backdrop-blur-md border border-white/10 shadow-glass;
+    transform: translateZ(0);
   }
   .glass-card {
     @apply glass rounded-2xl;
+  }
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
   }
 }
 
@@ -60,7 +86,10 @@ input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; marg
 input[type="number"] { -moz-appearance: textfield; }
 
 /* ── Smooth tab transitions ──────────────────────────────────────────────────── */
-main > * { transition: opacity 0.25s ease; }
+main > * {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  will-change: opacity, transform;
+}
 
 /* ── Focus ring override ─────────────────────────────────────────────────────── */
 :focus-visible {

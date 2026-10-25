@@ -90,17 +90,45 @@ export default function AlertsTab({ onUnreadChange }) {
         }
       />
 
+      {/* Alert Stats Banner */}
+      {alerts.length > 0 && (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <GlassCard className="p-3 text-center border-l-4 border-coral">
+            <span className="text-xs text-gray-500 font-medium">Critical</span>
+            <p className="text-xl font-black text-coral mt-0.5">
+              {alerts.filter(a => a.severity === 'critical' && !a.is_read).length}
+            </p>
+          </GlassCard>
+          <GlassCard className="p-3 text-center border-l-4 border-amber">
+            <span className="text-xs text-gray-500 font-medium">High</span>
+            <p className="text-xl font-black text-amber mt-0.5">
+              {alerts.filter(a => a.severity === 'high' && !a.is_read).length}
+            </p>
+          </GlassCard>
+          <GlassCard className="p-3 text-center border-l-4 border-mint">
+            <span className="text-xs text-gray-500 font-medium">Medium/Low</span>
+            <p className="text-xl font-black text-mint mt-0.5">
+              {alerts.filter(a => (a.severity === 'medium' || a.severity === 'low') && !a.is_read).length}
+            </p>
+          </GlassCard>
+          <GlassCard className="p-3 text-center">
+            <span className="text-xs text-gray-500 font-medium">Total Alerts</span>
+            <p className="text-xl font-black text-emerald-deep mt-0.5">{alerts.length}</p>
+          </GlassCard>
+        </div>
+      )}
+
       {/* Filter chips */}
-      <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">
+      <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 scrollbar-none sm:flex-wrap">
         {FILTERS.map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
             className={clsx(
-              'px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 border',
+              'px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 border',
               filter === f
-                ? 'bg-emerald-deep text-white border-emerald-deep'
-                : 'bg-white/60 text-gray-600 border-white/60 hover:border-mint/60 hover:text-emerald-deep'
+                ? 'bg-emerald-deep text-white border-emerald-deep shadow-sm'
+                : 'bg-white/70 text-gray-600 border-white/60 hover:border-mint/60 hover:text-emerald-deep active:scale-95'
             )}
           >
             {t(`alerts_filter_${f.toLowerCase()}`)}
@@ -113,29 +141,26 @@ export default function AlertsTab({ onUnreadChange }) {
       ) : filtered.length === 0 ? (
         <EmptyState icon={Bell} title={t('alerts_empty')} />
       ) : (
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filtered.map((a) => {
             const CatIcon = CATEGORY_ICONS[a.category] ?? Bell
             return (
               <GlassCard
                 key={a.id}
                 className={clsx(
-                  'p-4 border-l-4 transition-opacity duration-300',
+                  'p-4 border-l-4 transition-all duration-300 flex flex-col justify-between hover:shadow-glass-lg',
                   SEV_BORDER[a.severity] ?? 'border-l-mint',
                   a.is_read && 'opacity-60'
                 )}
               >
                 <div className="flex items-start gap-3">
                   <div className={clsx(
-                    'w-9 h-9 rounded-xl flex items-center justify-center shrink-0',
-                    a.severity === 'critical' ? 'bg-coral/10' :
-                    a.severity === 'high'     ? 'bg-coral/10' :
-                    a.severity === 'medium'   ? 'bg-amber/10' : 'bg-mint/10'
+                    'w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow-sm',
+                    a.severity === 'critical' ? 'bg-coral/10 text-coral' :
+                    a.severity === 'high'     ? 'bg-coral/10 text-coral' :
+                    a.severity === 'medium'   ? 'bg-amber/10 text-amber' : 'bg-mint/10 text-mint'
                   )}>
-                    <CatIcon size={18} className={clsx(
-                      a.severity === 'critical' || a.severity === 'high' ? 'text-coral' :
-                      a.severity === 'medium' ? 'text-amber' : 'text-mint'
-                    )} />
+                    <CatIcon size={18} />
                   </div>
 
                   <div className="flex-1 min-w-0">
@@ -148,23 +173,26 @@ export default function AlertsTab({ onUnreadChange }) {
                       </div>
                       <Badge label={t(`alert_sev_${a.severity}`)} severity={a.severity} />
                     </div>
-                    <p className="text-xs text-gray-600 mt-1 leading-relaxed">{a.message}</p>
+                    <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">{a.message}</p>
                     {a.recommendation && (
-                      <div className="mt-2 bg-mint/10 rounded-lg px-3 py-2 border border-mint/20">
+                      <div className="mt-2.5 bg-mint/10 rounded-xl px-3 py-2 border border-mint/20">
                         <p className="text-xs font-semibold text-emerald-deep mb-0.5">{t('alert_recommendation')}</p>
-                        <p className="text-xs text-gray-700">{a.recommendation}</p>
+                        <p className="text-xs text-gray-700 leading-normal">{a.recommendation}</p>
                       </div>
-                    )}
-                    {!a.is_read && (
-                      <button
-                        onClick={() => markRead(a.id)}
-                        className="mt-2 text-xs text-mint font-semibold hover:underline"
-                      >
-                        {t('alerts_mark_read')}
-                      </button>
                     )}
                   </div>
                 </div>
+
+                {!a.is_read && (
+                  <div className="mt-3 pt-2 border-t border-white/40 flex justify-end">
+                    <button
+                      onClick={() => markRead(a.id)}
+                      className="text-xs text-mint hover:text-emerald-deep font-semibold transition-colors flex items-center gap-1 active:scale-95"
+                    >
+                      <CheckCheck size={14} /> {t('alerts_mark_read')}
+                    </button>
+                  </div>
+                )}
               </GlassCard>
             )
           })}

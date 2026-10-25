@@ -70,22 +70,24 @@ function ResultRow({ r, t }) {
               <p className="text-sm text-gray-700">{r.explanation}</p>
             </div>
           )}
-          {r.input_payload && (
-            <div>
-              <p className="text-[10px] font-bold text-emerald-deep uppercase tracking-wide mb-1">{t('judge_input')}</p>
-              <pre className="text-[11px] bg-emerald-deep/5 rounded-lg p-3 overflow-x-auto text-gray-700 whitespace-pre-wrap">
-                {JSON.stringify(JSON.parse(r.input_payload), null, 2)}
-              </pre>
-            </div>
-          )}
-          {r.expected_output && (
-            <div>
-              <p className="text-[10px] font-bold text-emerald-deep uppercase tracking-wide mb-1">{t('judge_expected')}</p>
-              <pre className="text-[11px] bg-mint/5 rounded-lg p-3 overflow-x-auto text-gray-700 whitespace-pre-wrap">
-                {JSON.stringify(JSON.parse(r.expected_output), null, 2)}
-              </pre>
-            </div>
-          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {r.input_payload && (
+              <div>
+                <p className="text-[10px] font-bold text-emerald-deep uppercase tracking-wide mb-1">{t('judge_input')}</p>
+                <pre className="text-[11px] bg-emerald-deep/5 rounded-lg p-3 overflow-x-auto text-gray-700 whitespace-pre-wrap max-h-56">
+                  {JSON.stringify(JSON.parse(r.input_payload), null, 2)}
+                </pre>
+              </div>
+            )}
+            {r.expected_output && (
+              <div>
+                <p className="text-[10px] font-bold text-emerald-deep uppercase tracking-wide mb-1">{t('judge_expected')}</p>
+                <pre className="text-[11px] bg-mint/5 rounded-lg p-3 overflow-x-auto text-gray-700 whitespace-pre-wrap max-h-56">
+                  {JSON.stringify(JSON.parse(r.expected_output), null, 2)}
+                </pre>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </GlassCard>
@@ -192,25 +194,37 @@ export default function JudgeTab() {
       {/* Summary */}
       {summary && (
         <div className="space-y-3 animate-slide-up">
-          <h3 className="font-bold text-emerald-deep text-sm">{t('judge_summary_title')}</h3>
-          <GlassCard className="divide-y divide-white/30">
-            <div className="flex divide-x divide-white/30">
-              <SummaryBox label={t('judge_total')}   value={summary.total}  />
-              <SummaryBox label={t('judge_passed')}  value={summary.passed} color="text-mint" />
-              <SummaryBox label={t('judge_failed')}  value={summary.failed} color="text-coral" />
-              <SummaryBox label={t('judge_errors')}  value={summary.errors} color="text-amber" />
-            </div>
-            <div className="flex divide-x divide-white/30">
-              <SummaryBox
-                label={t('judge_avg_score')}
-                value={summary.avg_score != null ? `${(summary.avg_score * 100).toFixed(0)}%` : '—'}
-              />
-              <SummaryBox
-                label={t('judge_avg_latency')}
-                value={summary.avg_latency_ms != null ? `${summary.avg_latency_ms}ms` : '—'}
-              />
-            </div>
-          </GlassCard>
+          <h3 className="font-bold text-emerald-deep text-base">{t('judge_summary_title')}</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <GlassCard className="p-3 text-center">
+              <span className="text-2xl font-black text-emerald-deep">{summary.total ?? '—'}</span>
+              <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mt-0.5">{t('judge_total')}</p>
+            </GlassCard>
+            <GlassCard className="p-3 text-center border-l-4 border-mint">
+              <span className="text-2xl font-black text-mint">{summary.passed ?? '—'}</span>
+              <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mt-0.5">{t('judge_passed')}</p>
+            </GlassCard>
+            <GlassCard className="p-3 text-center border-l-4 border-coral">
+              <span className="text-2xl font-black text-coral">{summary.failed ?? '—'}</span>
+              <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mt-0.5">{t('judge_failed')}</p>
+            </GlassCard>
+            <GlassCard className="p-3 text-center border-l-4 border-amber">
+              <span className="text-2xl font-black text-amber">{summary.errors ?? '—'}</span>
+              <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mt-0.5">{t('judge_errors')}</p>
+            </GlassCard>
+            <GlassCard className="p-3 text-center">
+              <span className="text-2xl font-black text-emerald-deep">
+                {summary.avg_score != null ? `${(summary.avg_score * 100).toFixed(0)}%` : '—'}
+              </span>
+              <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mt-0.5">{t('judge_avg_score')}</p>
+            </GlassCard>
+            <GlassCard className="p-3 text-center">
+              <span className="text-2xl font-black text-emerald-deep">
+                {summary.avg_latency_ms != null ? `${summary.avg_latency_ms}ms` : '—'}
+              </span>
+              <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mt-0.5">{t('judge_avg_latency')}</p>
+            </GlassCard>
+          </div>
 
           {/* Result rows */}
           {summary.results.length > 0 && (
